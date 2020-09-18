@@ -17,4 +17,3 @@ int main() {
     printf("Hay un total de %i de letras  en el arreglo\n", contador);
     return 0;
 }
-//cmake-build-debug\Ejercicio__1.exe

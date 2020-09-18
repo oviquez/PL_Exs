@@ -1,0 +1,3 @@
+C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #2/Ejercicio #1 Punteros Genericos/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #2/Ejercicio #1 Punteros Genericos/cmake-build-debug/CMakeFiles/Ejercicio__1_Punteros_Genericos.dir
+C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #2/Ejercicio #1 Punteros Genericos/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #1/Ejercicio #3/main.c
+stdio.h
+-
+conio.h
+-
+
