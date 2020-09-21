@@ -6,7 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #1/Ejercicio #6/main.c" "C:/Users/edubi/Documents/Practicas lenguajes/G50/Eduardo Binns/Practica #1/Ejercicio #6/cmake-build-debug/CMakeFiles/Ejercicio__6.dir/main.c.obj"
   )
-set(CMAKE_C_COMPILER_ID "MSVC")
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

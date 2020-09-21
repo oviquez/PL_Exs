@@ -16,9 +16,11 @@ int main() {
     char str[20];
 
     printf("Enter a string : ");
-    scanf("%s", str);
+    scanf("%[^\n]", str);
     for (int i = 0; i < 20; i++) {
-        verificarLetra(&str[i]);
+        if(str[i] != ' '){
+            verificarLetra(&str[i]);
+        }
     }
     printf("You entered: %s", str);
 
