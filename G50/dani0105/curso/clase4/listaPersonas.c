@@ -54,7 +54,7 @@ struct person *newPerson(char id[8], short age, char name[20]){
     return person;
 }
 
-void printList(){
+void printL(){
     printf("Printing List\n");
     for(struct ListNode *aux = header; aux != NULL; aux = aux->next){
         struct person *p = aux->person;

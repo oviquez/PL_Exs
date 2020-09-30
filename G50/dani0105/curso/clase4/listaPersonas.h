@@ -23,7 +23,7 @@ struct person* like(char id[8]);
 
 struct person *newPerson(char id[8], short age, char name[20]);
 
-void printList();
+void printL();
 
 
 #endif //SEMANA3_LISTAPERSONAS_H

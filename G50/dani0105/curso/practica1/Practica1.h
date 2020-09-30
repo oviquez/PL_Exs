@@ -15,4 +15,6 @@ struct calzado{
 int countWords();
 void sumArrays(const int array1[10],const int array2[10]);
 struct calzado readShoe();
+
+void executePractia1();
 #endif //SEMANA3_PRACTICA1_H
