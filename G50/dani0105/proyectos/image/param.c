@@ -96,7 +96,7 @@ int getParams (int argc, char *argv[]){
                 printf("Flags:\n");
                 printf(" -t [Text]      Write text in top\n");
                 printf(" -b [Text]      Write text in bottom\n");
-                printf(" -f [1-4]       Chose font to use. 1: Arial 2: Impact 3: Terminal \n");
+                printf(" -f [1-4]       Chose font to use. 1: Arial 2: Impact 3: Informal Roman \n");
                 printf(" -s             Write small text\n");
                 printf(" -m             Write medium text\n");
                 printf(" -h             Write Big text\n");

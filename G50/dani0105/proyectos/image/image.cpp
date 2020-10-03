@@ -19,7 +19,7 @@ char * getFont(short type){
             result =("C:\\Windows\\fonts\\impact.ttf");
             break;
         case 3:
-            result =("C:\\Windows\\fonts\\terminal.ttf");
+            result =("C:\\Windows\\fonts\\INFROMAN.TTF");
             break;
         default:
             result =("C:\\Windows\\fonts\\arial.ttf");
@@ -42,8 +42,10 @@ int execute(char *path, char *topText, char *bottomText, short typeFont,short fo
 
     sf::Font font;
     cout<<"Loading Font\n";
-    if (!font.loadFromFile(getFont(typeFont)))
+    if (!font.loadFromFile(getFont(typeFont))){
+        cout<<"Error loading font\n";
        return -1;
+    }
 
     sf::Text textTop;
     textTop.setFont(font);
@@ -51,8 +53,10 @@ int execute(char *path, char *topText, char *bottomText, short typeFont,short fo
     textTop.setCharacterSize(fontSize);
     textTop.setFillColor(sf::Color::White);
     int middle = getMiddle(strlen(topText),fontSize,texture.getSize().x);
-    if(middle < 10)
+    if(middle < 10){
+        cout<<"Text To Long\n";
         return -1;
+    }
     textTop.setPosition(middle,10);
 
     sf::Text textBottom;
@@ -61,8 +65,10 @@ int execute(char *path, char *topText, char *bottomText, short typeFont,short fo
     textBottom.setCharacterSize(fontSize);
     textBottom.setFillColor(sf::Color::White);
     middle = getMiddle(strlen(bottomText),fontSize,texture.getSize().x);
-    if(middle < 10)
+    if(middle < 10){
+        cout<<"Text To Long\n";
         return -1;
+    }
 
     textBottom.setPosition(middle,texture.getSize().y - fontSize -15);
 
