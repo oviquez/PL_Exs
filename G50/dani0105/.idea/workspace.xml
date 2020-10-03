@@ -32,24 +32,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c798775-9bca-45eb-8d05-623df9a8132e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Semana3.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clase4/listaPersonas.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clase4/listaPersonas.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clase4/map.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clase4/map.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/clase4/mapa.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practica1/Practica1.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practica1/Practica1.h" beforeDir="false" />
-    </list>
+    <list default="true" id="4c798775-9bca-45eb-8d05-623df9a8132e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,8 +64,12 @@
       <option name="presentableId" value="Default" />
       <updated>1601421556586</updated>
       <workItem from="1601421557664" duration="4000" />
+      <workItem from="1601522920383" duration="11000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -94,5 +81,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
