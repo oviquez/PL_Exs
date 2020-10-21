@@ -16,9 +16,9 @@ main :: IO()
 main = do
     let answer = Answer "No" 0
     let answer2 = Answer "Si" 0
-    let question = Question "Pregunta 1" [answer,answer2]
-    let question1 = Question "Pregunta 2" [answer,answer2]
-    let form = Form [question, question1] "Prueba" 0
+    let question = Question "¿Estaría de acuerdo en apoyar el cobro de más impuestos para promover el levantamiento de la economía?" [answer2,answer]
+    let question1 = Question "¿Como catalogaría el desempeño del gobierno en el manejo de la pandemia por COVID?" defaultAnswer
+    let form = Form [question, question1] "Formulario Prueba" 0
     mainLoop [form]
 
 mainLoop :: [Form] ->IO()
@@ -28,10 +28,12 @@ mainLoop a = do
     option <- getLine 
     if option == "1" --Crear Formulario
         then do
+            clearScreen
             form <- makeForm
             mainLoop ( a ++ [form])
         else if option == "2"
             then  do 
+                clearScreen 
                 putStrLn"\n-- Formularios Disponibles --"
                 showForms a 1
                 inputjar <- readLn
@@ -40,7 +42,7 @@ mainLoop a = do
                 if option > totalElements
                     then mainLoop a
                     else do 
-                        putStrLn"Contestar Automaticamente [y=Sí,n=no] (por defecto y)"
+                        putStrLn" \nContestar Automaticamente [y=Sí,n=no] (por defecto y)"
                         auto <- getLine
                         let element = a !! (option-1) --get form
                         if auto == "n" 
@@ -53,6 +55,7 @@ mainLoop a = do
                                 
             else if option == "3" -- Estadisticas
                 then do
+                    clearScreen 
                     putStrLn"\n-- Estadisticas --"
                     putStrLn"1) Formularios contestados x veces"
                     putStrLn"2) Resultado de un formulario "
@@ -64,13 +67,15 @@ mainLoop a = do
                             inputjar <- readLn
                             let option = (inputjar ::Int)
                             let forms = filter ( \x -> (response x) >= option ) a
+                            clearScreen 
                             putStrLn " -- Formularios --"
                             showForms forms 1
-                            putStrLn " Presione Cualquier letra para continuar"
+                            putStrLn " \nPresione Cualquier letra para continuar"
                             getChar
                             mainLoop a
                         else if option == "2" 
                             then do
+                                clearScreen 
                                 putStrLn"\n-- Formularios Disponibles --"
                                 showForms a 1
                                 inputjar <- readLn
@@ -78,16 +83,18 @@ mainLoop a = do
                                 if option > (length a)
                                     then mainLoop a
                                     else do
+                                        clearScreen
                                         let form = a !! (option -1)
                                         printInformation (content form)
-                                        putStrLn " Presione Cualquier letra para continuar"
+                                        putStrLn " \nPresione Cualquier letra para continuar"
                                         getChar
                                         mainLoop a
                             else if option == "3"
                                 then do
+                                    clearScreen 
                                     let form = mostResponse (tail a) (head a)
-                                    putStrLn ("Formulario Más votado " ++ (name form))
-                                    putStrLn " Presione Cualquier letra para continuar"
+                                    putStrLn ("Formulario Más votado '" ++ (name form)++"'")
+                                    putStrLn " \nPresione Cualquier letra para continuar"
                                     getChar
                                     mainLoop a
                                 else mainLoop a
@@ -128,7 +135,7 @@ printInformation list = do
         then return()
         else do
             let aux = head list
-            putStrLn( question aux)
+            putStrLn( "\n"++question aux)
             printAnswerInfo (answerContent aux)
             printInformation (tail list)
 
@@ -151,16 +158,17 @@ makeForm = do
 
 makeQuestion :: [Question] -> IO [Question]
 makeQuestion questions = do 
+    clearScreen
     putStrLn "Escriba la pregunta"
     name <- getLine
 
-    putStrLn "Tipo de pregunta"
+    putStrLn "\nTipo de pregunta"
     putStrLn "1) Personalizada"
     putStrLn "2) De escala"
     option <- getLine
     answers <- doAnswer option
 
-    putStrLn "Crear otra pregunta [y=Sí,n=no] (por defecto y)"
+    putStrLn "\nCrear otra pregunta [y=Sí,n=no] (por defecto y)"
     option <- getLine
     if option == "n"
         then do
@@ -177,7 +185,7 @@ doAnswer option = do
             answers <- makeAnswer []
             return answers
         else do
-            putStrLn "Cargar escala por defecto [y=Sí,n=no] (por defecto y)"
+            putStrLn "\nCargar escala por defecto [y=Sí,n=no] (por defecto y)"
             option <- getLine
             if option == "n"
                 then do
@@ -190,7 +198,7 @@ makeAnswer answers = do
     putStrLn "Respuesta: "
     name <- getLine
     let answer = (Answer name 0)
-    putStrLn "Agregar Otra [y=Sí,n=no] (por defecto y)"
+    putStrLn "\nAgregar Otra [y=Sí,n=no] (por defecto y)"
     option <- getLine
     if option == "n"
         then return (answers ++ [answer])
@@ -220,7 +228,6 @@ showForms a n= do
 doForm :: Form -> IO Form
 doForm form = do
     questions <- doQuestion (content form)
-
     return (Form questions (name form) ((response form) +1))
 
 doQuestion :: [Question] -> IO [Question]
@@ -228,8 +235,9 @@ doQuestion list = do
     if null list 
         then return []
         else do
+            clearScreen
             let tempQuestion = head list
-            putStrLn( question tempQuestion)
+            putStrLn( "\n"++question tempQuestion)
             printAnswers (answerContent tempQuestion) 1 
             inputjar <- readLn
             let option = (inputjar ::Int)
