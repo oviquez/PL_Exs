@@ -75,19 +75,39 @@ mainLoop a = do
                                 showForms a 1
                                 inputjar <- readLn
                                 let option = (inputjar ::Int)
-                                let form = a !! (option -1)
-                                printInformation (content form)
-                                putStrLn " Presione Cualquier letra para continuar"
-                                getChar
-                                mainLoop a
+                                if option > (length a)
+                                    then mainLoop a
+                                    else do
+                                        let form = a !! (option -1)
+                                        printInformation (content form)
+                                        putStrLn " Presione Cualquier letra para continuar"
+                                        getChar
+                                        mainLoop a
                             else if option == "3"
-                                then mainLoop a
+                                then do
+                                    let form = mostResponse (tail a) (head a)
+                                    putStrLn ("Formulario Más votado " ++ (name form))
+                                    putStrLn " Presione Cualquier letra para continuar"
+                                    getChar
+                                    mainLoop a
                                 else mainLoop a
 
-                else do
-                    putStrLn "Adios!"
-                    return()
-    mainLoop a
+                else if  option == "4" 
+                    then do
+                        putStrLn "Adios!"
+                        return ()
+                    else mainLoop a
+
+mostResponse :: [Form] ->Form-> Form
+mostResponse list most= do
+    if null list
+        then do
+            most
+        else do
+            if (response most) < (response(head list)) 
+                then mostResponse (tail list) (head list)
+                else mostResponse (tail list) most
+
 
 automaticForm :: Form -> IO Form
 automaticForm form = do
@@ -156,7 +176,14 @@ doAnswer option = do
         then do 
             answers <- makeAnswer []
             return answers
-        else return defaultAnswer
+        else do
+            putStrLn "Cargar escala por defecto [y=Sí,n=no] (por defecto y)"
+            option <- getLine
+            if option == "n"
+                then do
+                    answers <- makeSacleAnswer [] 5
+                    return answers
+                else return defaultAnswer
 
 makeAnswer :: [Answer] -> IO [Answer]
 makeAnswer answers = do 
@@ -169,6 +196,17 @@ makeAnswer answers = do
         then return (answers ++ [answer])
         else do
             result <- makeAnswer (answers ++ [answer])
+            return result
+
+makeSacleAnswer :: [Answer] -> Int -> IO [Answer]
+makeSacleAnswer answers n = do
+    if n == 0
+        then return answers 
+        else do
+            putStrLn ("Respuesta para "++ show n)
+            name <- getLine
+            let answer = (Answer name 0)
+            result <- makeSacleAnswer (answers ++ [answer]) (n-1)
             return result
 
 showForms :: [Form] -> Int-> IO()
