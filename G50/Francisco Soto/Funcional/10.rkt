@@ -1,0 +1,26 @@
+(define (aplanar lista)
+  (cond ((null? lista)
+         '())
+        ((list? (car lista))
+         (append (aplanar (car lista)) (aplanar (cdr lista)))
+         )
+        (else
+         (cons (car lista) (aplanar (cdr lista)))
+         )
+        )
+  )
+
+(define (aplanar2 lista)
+  (apply append (map (lambda (x)
+                       (cond ((list? x)
+                              (aplanar2 x))
+                             (else
+                              (list x))
+                             )
+                       )
+                     lista)
+         )
+  )
+
+(aplanar '(1 2 (3 (4 5) (6 7))))
+(aplanar2 '(1 2 (3 (4 5) (6 7))))
