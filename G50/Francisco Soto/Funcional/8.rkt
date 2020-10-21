@@ -1,0 +1,17 @@
+(define (permutaciones lista)
+  (cond ((equal? (length lista) 1)
+         (list lista)
+         )
+        (else
+         (apply append (map (lambda(x)
+                              (map (lambda(y)
+                                     (cons x y)
+                                     )
+                                   (permutaciones (remove x lista)))
+                              )
+                            lista))
+         )
+        )
+  )
+
+(permutaciones '(1 2 3))
