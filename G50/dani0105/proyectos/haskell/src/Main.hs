@@ -23,7 +23,6 @@ main = do
 
 mainLoop :: [Form] ->IO()
 mainLoop a = do
-    
     printMenu
     option <- getLine 
     if option == "1" --Crear Formulario
@@ -106,20 +105,15 @@ mainLoop a = do
                     else mainLoop a
 
 mostResponse :: [Form] ->Form-> Form
+mostResponse [] most = most
 mostResponse list most= do
-    if null list
-        then do
-            most
-        else do
-            if (response most) < (response(head list)) 
-                then mostResponse (tail list) (head list)
-                else mostResponse (tail list) most
-
+    if (response most) < (response(head list)) 
+        then mostResponse (tail list) (head list)
+        else mostResponse (tail list) most
 
 automaticForm :: Form -> IO Form
 automaticForm form = do
     let questions = map (\n ->  ( Question (question n) (automaticAnswer (answerContent n)))) (content form)
-    
     return (Form questions (name form) ((response form) +1))
 
 automaticAnswer :: [Answer] -> [Answer]
@@ -130,23 +124,19 @@ automaticAnswer list = do
     replaceAtIndex (fst val) (Answer (text oldAnswer) ((stat oldAnswer) +1)) list
 
 printInformation :: [Question] -> IO()
+printInformation [] = return()
 printInformation list = do
-    if null list
-        then return()
-        else do
-            let aux = head list
-            putStrLn( "\n"++question aux)
-            printAnswerInfo (answerContent aux)
-            printInformation (tail list)
+    let aux = head list
+    putStrLn( "\n"++question aux)
+    printAnswerInfo (answerContent aux)
+    printInformation (tail list)
 
 printAnswerInfo :: [Answer] -> IO()
+printAnswerInfo [] = return ()
 printAnswerInfo list = do
-    if null list
-        then return()
-        else do
-            let aux = head list
-            putStrLn( (text aux )++" Total: "++ show (stat aux))
-            printAnswerInfo (tail list)
+    let aux = head list
+    putStrLn( (text aux )++" Total: "++ show (stat aux))
+    printAnswerInfo (tail list)
 
 makeForm ::IO Form
 makeForm = do
@@ -179,19 +169,17 @@ makeQuestion questions = do
             makeQuestion (questions ++ [question])
 
 doAnswer :: String -> IO [Answer]
+doAnswer "1" = do
+    answers <- makeAnswer []
+    return answers
 doAnswer option = do
-    if option == "1"
-        then do 
-            answers <- makeAnswer []
+    putStrLn "\nCargar escala por defecto [y=Sí,n=no] (por defecto y)"
+    option <- getLine
+    if option == "n"
+        then do
+            answers <- makeSacleAnswer [] 5
             return answers
-        else do
-            putStrLn "\nCargar escala por defecto [y=Sí,n=no] (por defecto y)"
-            option <- getLine
-            if option == "n"
-                then do
-                    answers <- makeSacleAnswer [] 5
-                    return answers
-                else return defaultAnswer
+        else return defaultAnswer
 
 makeAnswer :: [Answer] -> IO [Answer]
 makeAnswer answers = do 
@@ -207,23 +195,19 @@ makeAnswer answers = do
             return result
 
 makeSacleAnswer :: [Answer] -> Int -> IO [Answer]
+makeSacleAnswer answers 0 = return answers 
 makeSacleAnswer answers n = do
-    if n == 0
-        then return answers 
-        else do
-            putStrLn ("Respuesta para "++ show n)
-            name <- getLine
-            let answer = (Answer name 0)
-            result <- makeSacleAnswer (answers ++ [answer]) (n-1)
-            return result
+    putStrLn ("Respuesta para "++ show n)
+    name <- getLine
+    let answer = (Answer name 0)
+    result <- makeSacleAnswer (answers ++ [answer]) (n-1)
+    return result
 
 showForms :: [Form] -> Int-> IO()
+showForms [] _ = return()
 showForms a n= do
-    if null a
-        then return()
-        else do
-            putStrLn(show n ++ ") "++name (head a))
-            showForms (tail a) (n+1)
+    putStrLn(show n ++ ") "++name (head a))
+    showForms (tail a) (n+1)
 
 doForm :: Form -> IO Form
 doForm form = do
@@ -231,41 +215,35 @@ doForm form = do
     return (Form questions (name form) ((response form) +1))
 
 doQuestion :: [Question] -> IO [Question]
+doQuestion [] = return []
 doQuestion list = do
-    if null list 
-        then return []
-        else do
-            clearScreen
-            let tempQuestion = head list
-            putStrLn( "\n"++question tempQuestion)
-            printAnswers (answerContent tempQuestion) 1 
-            inputjar <- readLn
-            let option = (inputjar ::Int)
-            content <- doQuestion (tail list)
-            answers<-addStat (answerContent tempQuestion) option
-            let newQuestion = (Question (question tempQuestion) answers)
-            return ([newQuestion] ++ content) 
+    clearScreen
+    let tempQuestion = head list
+    putStrLn( "\n"++question tempQuestion)
+    printAnswers (answerContent tempQuestion) 1 
+    inputjar <- readLn
+    let option = (inputjar ::Int)
+    content <- doQuestion (tail list)
+    answers<-addStat (answerContent tempQuestion) option
+    let newQuestion = (Question (question tempQuestion) answers)
+    return ([newQuestion] ++ content) 
 
-                    
+
 addStat :: [Answer] -> Int ->IO [Answer]
+addStat list 1 = do
+    let header = head list
+    let newAnswer = (Answer (text header)  (stat header+1) )
+    return ([newAnswer] ++ tail list)
 addStat list n = do
-    if n == 1 
-        then do
-            let header = head list
-            let newAnswer = (Answer (text header)  (stat header+1) )
-            return ([newAnswer] ++ tail list)
-        else do
-            content <- addStat (tail list) (n-1)
-            return ( [(head list)] ++ content )
+    content <- addStat (tail list) (n-1)
+    return ( [(head list)] ++ content )
 
 
 printAnswers :: [Answer] ->Int -> IO()
+printAnswers [] _ = return()
 printAnswers a n =do
-    if null a
-        then return()
-        else do
-            putStrLn(show n ++ ") "++text (head a))
-            printAnswers (tail a) (n+1)
+    putStrLn(show n ++ ") "++text (head a))
+    printAnswers (tail a) (n+1)
 
 printMenu :: IO()
 printMenu = do
