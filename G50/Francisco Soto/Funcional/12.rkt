@@ -1,0 +1,15 @@
+(define (eliminar_elemento elemento lista)
+  (apply append (map (lambda (x)
+                       (cond ((equal? x elemento)
+                              '()
+                              )
+                             (else
+                              (list x)
+                              )
+                             )
+                       )
+                     lista)
+         ))
+
+(eliminar_elemento 3 '(1 2 3 4 5))
+(eliminar_elemento 0 '(1 2 3 4 5))
