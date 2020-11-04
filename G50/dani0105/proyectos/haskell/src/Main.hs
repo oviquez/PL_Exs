@@ -172,7 +172,7 @@ doAnswer :: String -> IO [Answer]
 doAnswer "1" = do
     answers <- makeAnswer []
     return answers
-doAnswer option = do
+doAnswer _ = do
     putStrLn "\nCargar escala por defecto [y=Sí,n=no] (por defecto y)"
     option <- getLine
     if option == "n"

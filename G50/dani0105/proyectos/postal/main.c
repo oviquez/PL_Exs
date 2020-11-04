@@ -120,8 +120,6 @@ int writeTextInImage(char *path, char *topText, char *bottomText, short typeFont
     sfText_setPosition(textBottom,*bottomVector);
 
 
-
-
     printf("Writing Text\n");
     sfRenderTexture *render;
     render = sfRenderTexture_create(sizeTexture.x, sizeTexture.y,0);
@@ -206,6 +204,9 @@ int main(int argc, char **argv) {
     if (optind < argc) {
         path = argv[optind];
     }
-
+    if(bottomText == NULL)
+        bottomText = "";
+    if(topText == NULL)
+        topText = "";
     return  verifyImage(path) == 0 ? writeTextInImage(path,topText,bottomText,typeFont,fontSize):-1;
 }
