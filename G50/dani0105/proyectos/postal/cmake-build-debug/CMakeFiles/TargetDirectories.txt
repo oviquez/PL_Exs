@@ -1,0 +1,3 @@
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/CMakeFiles/postal.dir
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/CMakeFiles/rebuild_cache.dir

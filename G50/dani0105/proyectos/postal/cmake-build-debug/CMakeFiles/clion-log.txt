@@ -1,0 +1,5 @@
+"C:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "D:\Daniel\Documents\Archivos\Semestre IV\Lenguajes de programacion\PL_Exs\G50\dani0105\proyectos\postal"
+-- Found SFML 2.5.1 in C:/MinGW/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug

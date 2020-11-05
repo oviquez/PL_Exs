@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="postal"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\MinGW\;CMake Files\MinGW\lib\;CMake Files\MinGW\lib\cmake\;CMake Files\MinGW\lib\cmake\SFML\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="postal">
+				<Option output="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/postal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 postal"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="postal/fast">
+				<Option output="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/postal.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 postal/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/main.c">
+			<Option target="postal"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image.h">
+			<Option target="postal"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_resize.h">
+			<Option target="postal"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_write.h">
+			<Option target="postal"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLSharedTargets-debug.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLSharedTargets-release.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/MinGW/lib/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\MinGW\lib\cmake\SFML\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,84 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/main.c
+stdio.h
+-
+getopt.h
+-
+SFML/Graphics.h
+-
+stb/stb_image.h
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image.h
+stb/stb_image_write.h
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_write.h
+stb/stb_image_resize.h
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_resize.h
+
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image.h
+stb_image.h
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image.h
+stdio.h
+-
+stdlib.h
+-
+stdarg.h
+-
+stddef.h
+-
+stdlib.h
+-
+string.h
+-
+limits.h
+-
+math.h
+-
+stdio.h
+-
+assert.h
+-
+stdint.h
+-
+emmintrin.h
+-
+intrin.h
+-
+arm_neon.h
+-
+
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_resize.h
+stb_image_resize.h
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_resize.h
+stdint.h
+-
+assert.h
+-
+string.h
+-
+math.h
+-
+stdlib.h
+-
+
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/proyectos/postal/stb/stb_image_write.h
+stdlib.h
+-
+stdio.h
+-
+stdarg.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+assert.h
+-
+
