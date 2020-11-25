@@ -1,0 +1,6 @@
+invertir([],L):-write(L).
+invertir([H|T],R):-
+    invertir(T,R),!.
+invertir([H|T]):-
+    invertir(T,[H]),!.
+
