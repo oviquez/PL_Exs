@@ -6,26 +6,21 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
-import javax.imageio.*;
-import javax.imageio.stream.*;
-import javax.imageio.metadata.*;
-import org.w3c.dom.*;
+import view.Main;
 
 /**
  *
@@ -36,30 +31,73 @@ public class Project {
     private final String PATH = "images/";
     private final String EXTENSION = ".png";
     private String name;
+    private String extension;
     
-    public Project(String name){
+    public Project(String name,String extension){
         this.name = name;
+        this.extension = "."+extension;
     }
     
     public Project(String name, String top, String bottom, int font,int size, File original) throws IOException {
         this.name = name;
-        this.copyFile(original.getPath(), this.PATH+this.name+ this.EXTENSION); //Copio el original y lo guardo en el proyecto
-        this.copyFile( this.PATH+this.name+ this.EXTENSION, this.PATH+this.name+"-postal"+this.EXTENSION); // copio el del proyecto para poder generar una postal
-        this.generatePostal(top,bottom,size,font);
+        String[] parts = original.getName().split("\\.");
+        this.extension = "."+parts[parts.length-1];
+        this.copyFile(original.getPath(), this.PATH+this.name+ this.extension); //Copio el original y lo guardo en el proyecto
+        this.copyFile( this.PATH+this.name+ this.extension, this.PATH+this.name+"-postal"+this.EXTENSION); // copio el del proyecto para poder generar una postal
+        this.generatePostal(name,top,bottom,size,font);
         
     }
     
-    private void generatePostal(String top,String bottom,int size,int font) throws IOException{
-        Runtime rt = Runtime.getRuntime();
+    public String getImagePath(){
+        return this.PATH+name+"."+this.extension;
+    }
+    
+    private void generatePostal(String name,String top,String bottom,int size,int font) throws IOException{
         String sizeFont = "-s";
         switch(size){
             case 2:
                 sizeFont = "-m";
+                break;
             case 3:
                 sizeFont = "-h";
+                break;
         }
-        String command = "postal \""+this.PATH+this.name+"-postal"+this.EXTENSION+"\" -t \""+top+"\" -b \""+bottom+"\" "+sizeFont+" -f "+font;
-        rt.exec(new String[]{"cmd.exe","/c",command});
+        
+        String fonType = "-f 1";
+        switch(font){
+            case 2:
+                fonType = "-f 2";
+                break;
+            case 3:
+                fonType = "-f 3";
+                break; 
+        }
+        System.out.println(fonType);
+        File postal = new File("images/c/postal.exe");
+        File image = new File(this.PATH+name+"-postal"+this.EXTENSION);
+        try {
+            ProcessBuilder exec = new ProcessBuilder(postal.getAbsolutePath(),image.getAbsolutePath(),"-t "+top,fonType,"-b "+bottom,sizeFont);
+            Process p = exec.start();
+
+            InputStream is = p.getInputStream();
+            /* Se prepara un bufferedReader para poder leer la salida más comodamente. */
+            BufferedReader br = new BufferedReader (new InputStreamReader (is));
+            
+            // Se lee la primera linea
+            String aux = br.readLine();
+            
+            // Mientras se haya leido alguna linea
+            while (aux!=null)
+            {
+                // Se escribe la linea en pantalla
+                System.out.println (aux);
+                
+                // y se lee la siguiente.
+                aux = br.readLine();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     private boolean copyFile(String pathFrom ,String pathTo) throws FileNotFoundException, IOException{
@@ -82,7 +120,7 @@ public class Project {
     }
     
     public ImageIcon getImage(){
-        return new ImageIcon(this.PATH+this.name+this.EXTENSION);
+        return new ImageIcon(this.PATH+this.name+this.extension);
     }
     
     public ImageIcon getPostal(){
@@ -100,15 +138,27 @@ public class Project {
             if(postal)
                 file = new File( this.PATH+this.getName()+"-postal"+this.EXTENSION );
             else
-                file = new File( this.PATH+this.getName()+this.EXTENSION);
-            Metadata metadata = ImageMetadataReader.readMetadata(file);
+                file = new File( this.PATH+this.getName()+this.extension);
+            
             ArrayList<String> propieties = new ArrayList<>();
-            for (Directory directory : metadata.getDirectories()) {
-                for (Tag tag : directory.getTags()) {
-                    propieties.add(tag.getTagName()+": "+tag.getDescription());
+            if(postal){
+                Metadata metadata = ImageMetadataReader.readMetadata(file);
+                
+                for (Directory directory : metadata.getDirectories()) {
+                    for (Tag tag : directory.getTags()) {
+                        propieties.add(tag.getTagName()+": "+tag.getDescription());
+                    }
                 }
+                return propieties;
             }
+            ImageIcon icon = this.getImage();
+          
+            propieties.add("Width: "+icon.getIconWidth());
+            propieties.add("Height: "+icon.getIconHeight());
+            
             return propieties;
+                    
+            
         } catch (ImageProcessingException ex) {
             Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
             return null;

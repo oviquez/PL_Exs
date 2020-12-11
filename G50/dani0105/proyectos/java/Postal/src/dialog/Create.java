@@ -7,7 +7,10 @@ package dialog;
 
 import interfaces.ProjectManager;
 import java.io.File;
+import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -203,8 +206,15 @@ public class Create extends javax.swing.JFrame{
         int size = comboSize.getSelectedIndex();
         size ++;
         font++;
-        System.out.println(bottom);
+        
         if( project.isEmpty() || (top.isEmpty() && bottom.isEmpty()) || this.file == null){ 
+            JOptionPane.showMessageDialog(this, "Datos Invalidos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        ImageIcon image = new ImageIcon(this.file.getPath());
+        if(image.getIconHeight() < 300 || image.getIconWidth() < 300 ){
+            JOptionPane.showMessageDialog(this, "Imagen pequeña", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

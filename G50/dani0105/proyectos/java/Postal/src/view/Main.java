@@ -7,15 +7,18 @@ package view;
 
 import dialog.Create;
 import dialog.ImageProperties;
+import interfaces.Plugin;
 import interfaces.ProjectManager;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import objects.Project;
 
 /**
@@ -34,7 +37,27 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         this.model = new DefaultListModel();
         listProjects.setModel(this.model);
         this.searchProjects();
+        this.searchPlugins();
     }
+    
+    private void searchPlugins(){
+        File plugins = new File("plugins/");
+        File[] files = plugins.listFiles();
+        for(int i = 0; i < files.length; i++){
+            if (!files[i].isFile())
+                continue;
+
+            String[] parts = files[i].getName().split("\\.");
+            if("jar".equals(parts[parts.length-1])){
+                String name = new String();
+                for(int x = 0; x < parts.length-1; x++){
+                    name = name+parts[x];
+                }
+                comboPlugins.addItem(name);
+            }
+        }
+    } 
+    
     
     private void searchProjects(){
         File images = new File("images/");
@@ -45,8 +68,13 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
             if (files[i].getName().contains("-postal"))
                 continue;
             
-            String name = files[i].getName().subSequence(0, files[i].getName().length()-4).toString();
-            Project project = new Project(name);
+            String[] parts = files[i].getName().split("\\.");
+            System.out.println(parts.length);
+            String name = new String();
+            for(int x = 0; x < parts.length-1; x++){
+                name = name+parts[x];
+            }
+            Project project = new Project(name,parts[parts.length-1]);
             this.projects.add(project);
             this.model.addElement(project);
         }
@@ -66,6 +94,7 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         jLabel3 = new javax.swing.JLabel();
         lblPostal = new javax.swing.JLabel();
         lblOriginal = new javax.swing.JLabel();
+        comboPlugins = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +117,12 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
             }
         });
 
-        btnPlugins.setText("Plugins");
+        btnPlugins.setText("Ejecutar");
+        btnPlugins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openPlugins(evt);
+            }
+        });
 
         jLabel3.setText("Proyectos Creados:");
 
@@ -122,23 +156,23 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
                         .addComponent(jLabel3)))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(comboPlugins, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPlugins)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnPlugins)
-                                .addGap(18, 18, 18))
+                                .addComponent(jLabel1)
+                                .addGap(133, 133, 133)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35))))))
+                                .addComponent(lblOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19)
+                                .addComponent(lblPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +189,9 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
                     .addComponent(lblPostal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPlugins)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnPlugins)
+                        .addComponent(comboPlugins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCreate))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -190,6 +226,29 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
        ImageProperties frame = new ImageProperties(this.project,true);
         frame.setVisible(true);
     }//GEN-LAST:event_openPostalInformation
+
+    private void openPlugins(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPlugins
+        if(this.project == null){
+             JOptionPane.showMessageDialog(this, "Seleccione un proyecto", "Error", JOptionPane.ERROR_MESSAGE);
+             return;
+        }
+        
+        String name = (String) comboPlugins.getSelectedItem();
+        File plugin = new File("plugins/"+name+".jar"); 
+        try {
+            URLClassLoader child = new URLClassLoader(
+                new URL[] {plugin.toURI().toURL()},
+                this.getClass().getClassLoader()
+            );
+            Class<?> Main = child.loadClass("main.Main");
+            Method m = Main.getDeclaredMethod("loadFile", String.class);
+            Object object =  Main.newInstance();
+            m.invoke(object, this.project.getImagePath());      
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar el plugin", "Error", JOptionPane.ERROR_MESSAGE);
+           
+        }     
+    }//GEN-LAST:event_openPlugins
 
     @Override
     public boolean saveProject(String name, String top, String bottom, int font,int size, File original) {
@@ -256,6 +315,7 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnPlugins;
+    private javax.swing.JComboBox<String> comboPlugins;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
