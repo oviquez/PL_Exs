@@ -1,0 +1,34 @@
+import Aplicacion.Arbol.*;
+import Aplicacion.Dibujar_Arbol.*;
+
+public class principal
+{
+  public static void main(String[] args)
+  {
+    //crear el arbol
+    Arbol raiz;
+    Arbol temp1, temp2, temp3;
+    
+    raiz = new dos_hijos(1);
+    temp1 = ((dos_hijos)raiz).hijo1 = new tres_hijos(2);
+    temp2 = ((dos_hijos)raiz).hijo2 = new un_hijo(3);
+    
+    temp3 = ((tres_hijos)temp1).hijo1 = new dos_hijos(4);
+    ((tres_hijos)temp1).hijo2 = new hoja(3,5);
+    ((tres_hijos)temp1).hijo3 = new hoja(4,6);
+    
+    ((un_hijo)temp2).hijo1 = new hoja(5,7);    
+    
+    ((dos_hijos)temp3).hijo1 = new hoja(1,8);
+    ((dos_hijos)temp3).hijo2 = new hoja(2,9);
+    
+
+    // imprimir con clase "imprimir"
+    dibujar i = new dibujar();
+    raiz.visit(i,null);
+    
+    // imprimir con clase "PrettyPrint"
+    PrettyPrintAST p = new PrettyPrintAST();
+    p.imprimir(raiz);
+  }
+}

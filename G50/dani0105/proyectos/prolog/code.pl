@@ -1,0 +1,121 @@
+:-dynamic dot/2.
+
+dot(dots,[]).
+
+delete_all():-
+   retractall(dot(_,_)),
+   assert(dot(dots,[])).
+
+delete(Id):-
+   dot(Id,Links),
+   retract(dot(Id,_)),
+   remove_link(Id,Links),
+   remove_dot(Id).
+
+remove_link(_,[]).
+
+remove_link(Id,[Head|List]):-
+   delete_link(Head,Id),
+   remove_link(Id,List).
+
+
+delete_link(Id,Target):-
+   dot(Id,Links),
+   deletelist(Links,[Target],Result),
+   retract(dot(Id,_)),
+   assert(dot(Id,Result)).
+
+
+% Agrega un nuevo enlace a un nodo
+add_link(Id,Target):-
+   dot(Id,Links),
+   not(member(Target,Links)),
+   append([Target],Links,Result),
+   retract(dot(Id,_)),
+   assert(dot(Id,Result)).
+
+add_link(Id,Target):-
+   dot(Id,Links),
+   member(Target,Links).
+
+%Inserta nuevos nodos
+
+remove_dot(Id):-
+   dot(dots,Dots),
+   deletelist(Dots,[Id],Result),
+   retract(dot(dots,_)),
+   assert(dot(dots,Result)).
+
+insert_dot(Id):-
+   dot(dots,Dots),
+   retract(dot(dots,_)),
+   append([Id],Dots,Result),
+   assert(dot(dots,Result)).
+
+insert(Id,[]):-
+   assert(dot(Id,[])),
+   insert_dot(Id).
+
+insert(Id,Others):-
+   assert(dot(Id,Others)),
+   insert_dot(Id),
+   insert_link(Id,Others).
+
+%inserta links a los vecinos
+insert_link(_,[]).
+
+insert_link(Id,[Head|List]):-
+   add_link(Head,Id),
+   insert_link(Id,List).
+
+
+
+deletelist([], _, []).
+deletelist([X|Xs], Y, Z) :- member(X, Y), deletelist(Xs, Y, Z), !.
+deletelist([X|Xs], Y, [X|Zs]) :- deletelist(Xs, Y, Zs).
+
+
+find_group2(Visted,[],Result):-Result = Visted.
+
+find_group2(Visted,Routes,Result):-
+   get_next(Visted,Routes,Next),
+   find_group(Next,Visted,Routes,Result).
+
+find_group(Initial,Visted,Routes,Result):-
+    dot(Initial,Others),
+    append(Others,Routes,Final),
+    deletelist(Final,[Initial|Visted],Aux),
+    find_group2([Initial|Visted],Aux,Result).
+
+find_group(_,Visted,[],Group):-
+   Group = Visted.
+
+get_next(Visted,[Header|Tail],Target):-
+    member(Header,Visted),
+    get_next(Visted,Tail,Target),!.
+
+get_next(Visted,[Header|_],Target):-
+    not(member(Header,Visted)),
+    Target = Header,!.
+
+find_group(Initial,Group):-
+   dot(Initial,[Head|Tail]),
+   find_group(Head,[Initial],Tail,Group),!.
+
+find_group(Initial,Group):-
+   Group = [Initial],!.
+
+find_all_groups(Result,[],Aux):-Aux=Result,!.
+
+find_all_groups(Result,[Head|Dots],Aux):-
+   find_group(Head,Group),
+   append([Group],Result,Total),
+   deletelist(Dots,Group,FDots),
+   find_all_groups(Total,FDots,Aux).
+
+find_all_groups(Result):-
+   dot(dots,Dots),
+   find_all_groups([],Dots,Result).
+
+
+

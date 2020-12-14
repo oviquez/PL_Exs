@@ -1,0 +1,31 @@
+Realice el siguiente ejercicio para averiguar si una persona puede conducir o no despues de una fiesta.
+
+Debe construir la base de datos con los siguientes hechos:
+
+- felipe es amigo de maría.   --|
+- ricardo es amigo de felipe    |- use una regla afín (Ej: amigos)
+- maria es amiga de pablo     --|
+
+- felipe tiene licencia
+- luis tiene licencia
+- maria tiene licencia
+
+- maria no bebió en la fiesta
+- pablo no bebió en la fiesta
+
+- pablo vive cerca para irse caminando
+- maria vive cerca para irse caminando
+
+- felipe tiene carro propio
+- maria tiene carro propio
+- luis tiene carro propio
+
+Realizar las siguientes reglas:
+
+- conocer a un conductor seguro: cuallquier personas que tenga un amigo que sea un conductor seguro.
+
+- conductor seguro: es cualquier persona que no ha bebido , que tiene licencia y que tiene carro propio.
+
+REGLA PRINCIPAL:
+
+Realizar la regla principal que dice si una persona puede volver a su casa sano y salvo o todas las personas que pueden volver a bajo esa condicion a su casa.

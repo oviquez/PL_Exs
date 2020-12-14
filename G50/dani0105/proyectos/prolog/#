@@ -1,0 +1,35 @@
+dot(0,[1]).
+dot(1,[2]).
+dot(2,[3]).
+dot(3,[0]).
+dot(4,[0]).
+
+deletelist([], _, []).
+deletelist([X|Xs], Y, Z) :- member(X, Y), deletelist(Xs, Y, Z), !.
+deletelist([X|Xs], Y, [X|Zs]) :- deletelist(Xs, Y, Zs).
+
+
+find_group2(Visted,[],Result):-Result = Visted.
+
+find_group2(Visted,Routes,Result):-
+   get_next(Visted,Routes,Next),
+   find_group(Next,Visted,Routes,Result).
+
+find_group(Initial,Visted,Routes,Result):-
+    dot(Initial,Others),
+    append(Others,Routes,Final),
+    deletelist(Final,[Initial|Visted],Aux),
+    find_group2([Initial|Visted],Aux,Result).
+
+
+get_next(Visted,[Header|Tail],Target):-
+    member(Header,Visted),
+    get_next(Visted,Tail,Target).
+
+get_next(Visted,[Header|_],Target):-
+    not(member(Header,Visted)),
+    Target = Header,!.
+
+find_group(Initial,Group):-
+   dot(Initial,[Head|Tail]),
+   find_group(Head,[Initial],Tail,Group).

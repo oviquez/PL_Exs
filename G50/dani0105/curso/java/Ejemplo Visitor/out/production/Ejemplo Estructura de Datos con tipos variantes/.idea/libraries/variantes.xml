@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="variantes">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/variantes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
