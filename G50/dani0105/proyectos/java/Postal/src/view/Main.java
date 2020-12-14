@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import dialog.Create;
 import dialog.ImageProperties;
-import interfaces.Plugin;
 import interfaces.ProjectManager;
 import java.awt.Image;
 import java.io.File;
@@ -21,15 +15,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import objects.Project;
 
-/**
- *
- * @author Daniel
- */
 public class Main extends javax.swing.JFrame implements ProjectManager {
 
     private ArrayList<Project> projects;
     private DefaultListModel model;
     private Project project;
+    
     
     public Main() {
         initComponents();
@@ -39,6 +30,7 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         this.searchProjects();
         this.searchPlugins();
     }
+    
     
     private void searchPlugins(){
         File plugins = new File("plugins/");
@@ -57,7 +49,6 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
             }
         }
     } 
-    
     
     private void searchProjects(){
         File images = new File("images/");
@@ -80,7 +71,6 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         }
         
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -199,7 +189,6 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     private void openCreateDialog(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openCreateDialog
         this.setVisible(false);
         Create createFrame = new Create(this);
@@ -218,12 +207,16 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
     }//GEN-LAST:event_projectSelected
 
     private void openOriginalInfo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openOriginalInfo
+        if(this.project == null)
+            return;
         ImageProperties frame = new ImageProperties(this.project,false);
         frame.setVisible(true);
     }//GEN-LAST:event_openOriginalInfo
 
     private void openPostalInformation(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openPostalInformation
-       ImageProperties frame = new ImageProperties(this.project,true);
+        if(this.project == null)
+            return;
+        ImageProperties frame = new ImageProperties(this.project,true);
         frame.setVisible(true);
     }//GEN-LAST:event_openPostalInformation
 
@@ -245,8 +238,8 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
             Object object =  Main.newInstance();
             m.invoke(object, this.project.getImagePath());      
         } catch (Exception e) {
+            System.out.println(e);
             JOptionPane.showMessageDialog(this, "Error al cargar el plugin", "Error", JOptionPane.ERROR_MESSAGE);
-           
         }     
     }//GEN-LAST:event_openPlugins
 
@@ -270,16 +263,12 @@ public class Main extends javax.swing.JFrame implements ProjectManager {
         }
     }
 
-    
-    
     @Override
     public void cancel() {
         this.setVisible(true);
     }
+
     
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

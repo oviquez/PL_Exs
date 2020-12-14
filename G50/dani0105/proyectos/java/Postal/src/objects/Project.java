@@ -15,17 +15,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import view.Main;
 
-/**
- *
- * @author Daniel
- */
+
 public class Project {
     
     private final String PATH = "images/";
@@ -45,11 +41,10 @@ public class Project {
         this.copyFile(original.getPath(), this.PATH+this.name+ this.extension); //Copio el original y lo guardo en el proyecto
         this.copyFile( this.PATH+this.name+ this.extension, this.PATH+this.name+"-postal"+this.EXTENSION); // copio el del proyecto para poder generar una postal
         this.generatePostal(name,top,bottom,size,font);
-        
     }
     
     public String getImagePath(){
-        return this.PATH+name+"."+this.extension;
+        return this.PATH+name+this.extension;
     }
     
     private void generatePostal(String name,String top,String bottom,int size,int font) throws IOException{
@@ -63,13 +58,13 @@ public class Project {
                 break;
         }
         
-        String fonType = "-f 1";
+        String fonType = "-a";
         switch(font){
             case 2:
-                fonType = "-f 2";
+                fonType = "-i";
                 break;
             case 3:
-                fonType = "-f 3";
+                fonType = "-r";
                 break; 
         }
         System.out.println(fonType);
