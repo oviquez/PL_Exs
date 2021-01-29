@@ -1,0 +1,51 @@
+:-dynamic matrix/2.
+
+matrix(1,[2,5,6]).
+matrix(2,[1,5,6,"o",3]).
+matrix(3,[2,6,"o","o",4]).
+matrix(4,[3,"o","o"]).
+matrix(5,[1,2,6,9,"o"]).
+matrix(6,[1,2,3,5,9,"o",11]).
+matrix(9,[5,6,"o"]).
+matrix(11,[6,"o","o","o",12]).
+matrix(12,["o","o",11]).
+
+
+deletelist([], _, []).
+deletelist([X|Xs], Y, Z) :- member(X, Y), deletelist(Xs, Y, Z), !.
+deletelist([X|Xs], Y, [X|Zs]) :- deletelist(Xs, Y, Zs).
+
+get_next(Visted,[Header|Tail],Target):-
+    not(Header == "o"),
+    member(Header,Visted),
+    get_next(Visted,Tail,Target),!.
+
+get_next(Visted,[Header|Tail],Target):-
+    Header == "o",
+    get_next(Visted,Tail,Target),!.
+
+get_next(Visted,[Header|_],Target):-
+    not(member(Header,Visted)),
+    not(Header == "o"),
+    Target = Header,!.
+
+find_path(Initial,Target):-
+   find_path(Initial,Target,[]).
+
+
+find_path(Initial,Target,Visted):-
+   matrix(Initial,Routes),
+   get_next(Visted,Routes,Temp),
+   Temp == Target,
+   write([Visted|Initial]).
+
+find_path(Initial,Target,Visted):-
+   matrix(Initial,Routes),
+   get_next(Visted,Routes,Temp),
+   find_path(Temp,Target,[Visted|Initial]).
+
+find_path(Initial,Target,Visted):-
+   matrix(Initial,Routes),
+   get_next(Visted,Routes,Temp),
+   not(find_path(Temp,Target,[Initial|Visted])),
+   find_path(Initial,Target,[Visted|Temp]).
