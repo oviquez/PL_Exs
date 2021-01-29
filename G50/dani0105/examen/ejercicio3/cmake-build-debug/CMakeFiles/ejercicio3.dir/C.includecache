@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Daniel/Documents/Archivos/Semestre IV/Lenguajes de programacion/PL_Exs/G50/dani0105/examen/ejercicio3/main.c
+stdio.h
+-
+
